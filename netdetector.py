@@ -25,11 +25,14 @@ def get_vendor(mac: str) -> str:
     except Exception:
         return "Vendor Lookup Failed"
 response = ""
+to = input("Enter the recieving email address:") #gets the users email address as input before launching the ARP scanner
 def handle_packet(packet):
     if packet.haslayer(ARP) and packet[ARP].op == 1:  # ARP "who-has" (request)
         mac = packet[ARP].hwsrc.lower()
         if mac not in WHITELIST:
             response = get_vendor(mac)
-            email_alert("Unapproved MAC " + mac + " from vendor " + response + " has joined the network!", "Unapproved MAC " + mac +  " has joined the network!", "-input email-")
+            print(f"Intruding MAC {mac} from vendor {response}")
+            email_alert("Unapproved MAC " + mac + " from vendor " + response + " has joined the network!", "Unapproved MAC " + mac +  " has joined the network!", to)
+
 
 sniff(filter="arp", prn=handle_packet, store=False)
