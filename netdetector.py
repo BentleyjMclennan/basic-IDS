@@ -4,7 +4,6 @@ import os
 from scapy.all import sniff, ARP
 import urllib.request
 import urllib.error
-## testing git push
 def load_whitelist(path: str = "whitelist.json") -> set:
     base_dir = os.path.dirname(os.path.abspath(__file__))
     full_path = os.path.join(base_dir, path)
