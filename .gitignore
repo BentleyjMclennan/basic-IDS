@@ -220,3 +220,4 @@ __marimo__/
 #credentials stuff
 credentials.json
 whitelist.json
+config.json
